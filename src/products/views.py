@@ -16,7 +16,7 @@ def product_detail_view(request, id):
 	context = {
 		'obj':obj
 	}
-	return render(request,"product/detail.html",context)
+	return render(request,"product/product_detail.html",context)
 
 
 def product_delete_view(request, id):
@@ -26,8 +26,8 @@ def product_delete_view(request, id):
 	if request.method == "POST":
 		#confirming delete
 		obj.delete()
-		#redirect after deletion
-		return redirect('../../') 
+		#redirect after deletion to be home list page
+		return redirect('../../../products/') 
 	context = {
 		'obj':obj
 	}

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{{ obj_list }}
+<!-- {{ obj_list }} -->
 
 {% for instance in obj_list %}
 	<p>{{instance.id}} - 
@@ -10,7 +10,12 @@
 			{{instance.title}} 
 		</a>
 	</p>
-	<p>Link : {{ instance.get_absolute_url }}</p>
+	<p>
+		<a href='{{ instance.get_absolute_url }}delete/'> 
+			Delete product
+		</a>
+	</p>
+	<!-- <p>Link : {{ instance.get_absolute_url }}</p>   -->
 
 {% endfor %}
 

@@ -1,11 +1,11 @@
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from .forms import ProductForm, RawProductForm
 # Create your views here.
-def product_detail_view(request, my_id):
+def product_detail_view(request, id):
 	#obj = Product.objects.get(id=my_id)
-	obj = get_object_or_404(Product, id=my_id)
+	obj = get_object_or_404(Product, id=id)
 	
 
 	#try:
@@ -23,15 +23,35 @@ def product_delete_view(request, id):
 	obj = get_object_or_404(Product,id=id)
 	#POST request for deletion
 
-	if request == "POST":
+	if request.method == "POST":
+		#confirming delete
 		obj.delete()
-		
+		#redirect after deletion
+		return redirect('../../') 
 	context = {
 		'obj':obj
 	}
 	return render(request,"product/product_delete.html",context)
 
+def product_list_view(request):
+	queryset = Product.objects.all() #list of objects
+	context = {
+		'obj_list':queryset
+	}
+	return render(request,"product/product_list.html",context)
 
+
+def product_update_view(request,id=id):
+	obj = get_object_or_404(Product, id=id)
+	form = ProductForm(request.POST or None, instance = obj)
+	if form.is_valid():
+		form.save()
+		return redirect('../')
+		
+	context = {
+		'form':form
+	}
+	return render(request,"product/product_update.html",context)
 
 
 ### example of raw form ###

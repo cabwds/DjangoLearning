@@ -1,0 +1,11 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block content %}
+<h1>Item:</h1>
+
+<h3>{{obj.title}}</h3>
+<p>Content: {% if obj.content != "" %} {{ obj.content }} {% else %} Content Coming Soon {% endif %}</p> 
+
+<a href="../">Back</a>
+<!-- <p>{% if obj.price %} {{ oobj.price }} {% else %} Price Coming Soon {% endif %}</p>  -->
+{% endblock %}
